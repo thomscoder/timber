@@ -1,0 +1,19 @@
+.row {
+  display: flex;
+}
+
+.cell {
+  box-sizing: border-box;
+  border: solid #a00;
+  margin: 4px;
+  height: 50px;
+  width: 50px;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell.active {
+  background-color: rgb(0, 255, 81);
+}

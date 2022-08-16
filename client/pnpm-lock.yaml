@@ -1,17 +1,21 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@faker-js/faker': ^7.4.0
   '@types/react': ^18.0.17
   '@types/react-dom': ^18.0.6
   '@vitejs/plugin-react': ^2.0.1
   react: ^18.2.0
   react-dom: ^18.2.0
+  reactjs-popup: ^2.0.5
   typescript: ^4.6.4
   vite: ^3.0.7
 
 dependencies:
+  '@faker-js/faker': 7.4.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  reactjs-popup: 2.0.5_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@types/react': 18.0.17
@@ -297,6 +301,11 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@faker-js/faker/7.4.0:
+    resolution: {integrity: sha512-xDd3Tvkt2jgkx1LkuwwxpNBy/Oe+LkZBTwkgEFTiWpVSZgQ5sc/LenbHKRHbFl0dq/KFeeq/szyyPtpJRKY0fg==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    dev: false
 
   /@jridgewell/gen-mapping/0.1.1:
     resolution: {integrity: sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w==}
@@ -782,6 +791,17 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
+
+  /reactjs-popup/2.0.5_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-b5hv9a6aGsHEHXFAgPO5s1Jw1eSkopueyUVxQewGdLgqk2eW0IVXZrPRpHR629YcgIpC2oxtX8OOZ8a7bQJbxA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /resolve/1.22.1:
