@@ -1,0 +1,33 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "pnpm lint-staged",
+    "commit": "cz",
+    "dev": "cd client && pnpm dev",
+    "postinstall": "cd client && pnpm install",
+    "format": "prettier --config ./.prettierrc.js --write --loglevel silent '**/*.{js,ts,tsx,css}'",
+    "prepare": "pnpm dlx husky-init && husky install",
+    "lint": "pnpm format",
+    "build": "cd client && npm run build"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,css}": "pnpm lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "commitizen": "^4.2.5",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
+  }
+}
