@@ -1,6 +1,6 @@
 import { FormEvent, MouseEvent, useEffect, useState } from 'react';
 import { activateCell } from '../../actions/gridActions';
-import TimberGrid, { TGrid } from '../../utils/grid';
+import TimberGrid, { TNode } from '../../utils/grid';
 
 // css
 import './Grid.css';
@@ -13,7 +13,7 @@ function Grid({ size: GRID_SIZE }: GridProps): JSX.Element {
   const timberGrid = new TimberGrid(GRID_SIZE);
   let letters: string[] = [];
 
-  const [grid, setGrid] = useState<TGrid[][]>([]);
+  const [grid, setGrid] = useState<TNode[][]>([]);
   const [wordFound, setWordFound] = useState<string>('');
 
   const toggleCell = (e: MouseEvent, y: number, x: number) => {
