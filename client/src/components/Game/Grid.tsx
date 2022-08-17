@@ -1,6 +1,6 @@
 import { FormEvent, MouseEvent, useEffect, useState } from 'react';
 import { activateCell } from '../../actions/gridActions';
-import TimberGrid from '../../utils/grid';
+import TimberGrid, { TGrid } from '../../utils/grid';
 
 // css
 import './Grid.css';
@@ -13,12 +13,11 @@ function Grid({ size: GRID_SIZE }: GridProps): JSX.Element {
   const timberGrid = new TimberGrid(GRID_SIZE);
   let letters: string[] = [];
 
-  const [grid, setGrid] = useState<string[][][]>([]);
+  const [grid, setGrid] = useState<TGrid[][]>([]);
   const [wordFound, setWordFound] = useState<string>('');
 
   const toggleCell = (e: MouseEvent, y: number, x: number) => {
     const newGrid = activateCell(grid, [y, x]);
-    console.log(newGrid);
     setGrid([...newGrid]);
   };
 
@@ -42,9 +41,10 @@ function Grid({ size: GRID_SIZE }: GridProps): JSX.Element {
         {grid.map((row, rowIndex) => (
           <div key={rowIndex} className="row">
             {row.map((cell, cellIndex) => {
-              const [letter, ...rest] = cell;
+              const letter = cell.letter;
+              const active = cell.active ? 'active' : '';
               return (
-                <div key={cellIndex} className={`${rest!} cell`} onClick={(e) => toggleCell(e, rowIndex, cellIndex)}>
+                <div key={cellIndex} className={`${active} cell`} onClick={(e) => toggleCell(e, rowIndex, cellIndex)}>
                   {letter}
                 </div>
               );
