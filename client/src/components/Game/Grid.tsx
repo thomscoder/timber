@@ -43,8 +43,9 @@ function Grid({ size: GRID_SIZE }: GridProps): JSX.Element {
             {row.map((cell, cellIndex) => {
               const letter = cell.letter;
               const active = cell.active ? 'active' : '';
+              const belongsToPath = cell.belongsToPath ? 'belongsToPath' : '';
               return (
-                <div key={cellIndex} className={`${active} cell`} onClick={(e) => toggleCell(e, rowIndex, cellIndex)}>
+                <div key={cellIndex} className={`${active} ${belongsToPath} cell`} onClick={(e) => toggleCell(e, rowIndex, cellIndex)}>
                   {letter}
                 </div>
               );

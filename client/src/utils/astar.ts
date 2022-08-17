@@ -15,35 +15,35 @@ const getNeighbors = (grid: TNode[][], position: [number, number]) => {
   const bottomLeft = bottom && left && grid[y + 1][x - 1];
   const bottomRight = bottom && right && grid[y + 1][x + 1];
 
-  if (top) {
+  if (top && !top.belongsToPath && !top.visited) {
     top.astar.g = 1;
     neighbors.set('top', top);
   }
-  if (bottom) {
+  if (bottom && !bottom.belongsToPath && !bottom.visited) {
     bottom.astar.g = 1;
     neighbors.set('bottom', bottom);
   }
-  if (left) {
+  if (left && !left.belongsToPath && !left.visited) {
     left.astar.g = 1;
     neighbors.set('left', left);
   }
-  if (right) {
+  if (right && !right.belongsToPath && !right.visited) {
     right.astar.g = 1;
     neighbors.set('right', right);
   }
-  if (topLeft) {
+  if (topLeft && !topLeft.belongsToPath && !topLeft.visited) {
     topLeft.astar.g = 1.4;
     neighbors.set('topLeft', topLeft);
   }
-  if (topRight) {
+  if (topRight && !topRight.belongsToPath && !topRight.visited) {
     topRight.astar.g = 1.4;
     neighbors.set('topRight', topRight);
   }
-  if (bottomLeft) {
+  if (bottomLeft && !bottomLeft.belongsToPath && !bottomLeft.visited) {
     bottomLeft.astar.g = 1.4;
     neighbors.set('bottomLeft', bottomLeft);
   }
-  if (bottomRight) {
+  if (bottomRight && !bottomRight.belongsToPath && !bottomRight.visited) {
     bottomRight.astar.g = 1.4;
     neighbors.set('bottomRight', bottomRight);
   }

@@ -17,3 +17,7 @@
 .cell.active {
   background-color: rgb(0, 255, 81);
 }
+
+.cell.belongsToPath {
+  background-color: rgb(255, 204, 0);
+}

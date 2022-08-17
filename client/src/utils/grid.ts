@@ -1,4 +1,4 @@
-import { alphabet } from './faker';
+import { alphabet } from './utils';
 
 export type TNode = {
   letter: string;
@@ -6,6 +6,7 @@ export type TNode = {
   active: boolean;
   visited: boolean;
   parent: null | TNode;
+  belongsToPath: boolean;
   astar: {
     g: number;
     h: number;
@@ -26,6 +27,7 @@ export default class TimberGrid {
         active: false,
         visited: false,
         parent: null,
+        belongsToPath: false,
         astar: {
           g: 0,
           h: 0,
