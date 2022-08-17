@@ -1,8 +1,8 @@
 import { FormEvent, MouseEvent, useEffect, useState } from 'react';
-import { activateCell } from '../../actions/gridActions';
+import { activateCell, clearGrid } from '../../actions/gridActions';
 import TimberGrid, { TNode } from '../../utils/grid';
 import Timber from '../../utils/trie';
-import { randomNames } from '../../utils/utils';
+import { capitalizeFirstLetter, randomWords } from '../../utils/utils';
 
 // css
 import './Grid.css';
@@ -16,6 +16,7 @@ function Grid({ size: GRID_SIZE }: GridProps): JSX.Element {
   const [wordFound, setWordFound] = useState<string>('');
   const [letters, setLetters] = useState<string[]>([]);
   const [trie, setTrie] = useState<Timber>(new Timber());
+  const [points, setPoints] = useState<number>(0);
 
   const toggleCell = (e: MouseEvent, y: number, x: number) => {
     const newGrid = activateCell(grid, [y, x]);
@@ -28,24 +29,28 @@ function Grid({ size: GRID_SIZE }: GridProps): JSX.Element {
 
     const word = letters.join('');
     const found = trie.search(capitalizeFirstLetter(word));
+    const { grid: newGrid, wordOrder } = clearGrid(grid);
+
     if (!found) {
       setWordFound('not found');
+      setPoints((p) => p - wordOrder);
     } else {
       setWordFound(found);
+      setPoints((p) => p + wordOrder);
     }
+
     setLetters([]);
+    setGrid([...newGrid]);
   };
 
   useEffect(() => {
     const timberGrid = new TimberGrid(GRID_SIZE);
 
-    for (let i = 0; i < randomNames.length; i++) {
-      trie.insert(randomNames[i]);
+    for (let i = 0; i < randomWords.length; i++) {
+      trie.insert(randomWords[i]);
     }
     return setGrid(timberGrid.generate());
   }, []);
-
-  useEffect(() => {}, [wordFound]);
 
   return (
     <form onSubmit={submitWord}>
@@ -67,12 +72,9 @@ function Grid({ size: GRID_SIZE }: GridProps): JSX.Element {
       </div>
       <button type="submit">Submit</button>
       {wordFound && <div className="word-found">{wordFound}</div>}
+      <div className="points">{points}</div>
     </form>
   );
-}
-
-function capitalizeFirstLetter(str: string) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 export default Grid;

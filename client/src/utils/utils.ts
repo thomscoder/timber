@@ -14,4 +14,13 @@ export const arrayWithFixedLength = (length: number) => {
   return array;
 };
 
-export const randomNames = Array.from({ length: 1000000 }, (v, k) => faker.name.firstName());
+export const capitalizeFirstLetter = (str: string): string => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+export const randomWords = [
+  ...Array.from({ length: 1000000 }, (v, k) => faker.name.firstName()),
+  ...Array.from({ length: 1000000 }, (v, k) => capitalizeFirstLetter(faker.word.noun())),
+  ...Array.from({ length: 1000000 }, (v, k) => capitalizeFirstLetter(faker.word.adjective())),
+  ...Array.from({ length: 1000000 }, (v, k) => capitalizeFirstLetter(faker.address.country())),
+];
