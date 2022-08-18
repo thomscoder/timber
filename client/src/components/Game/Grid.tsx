@@ -1,22 +1,19 @@
 import { FormEvent, MouseEvent, useEffect, useState } from 'react';
 import { activateCell, clearGrid } from '../../actions/gridActions';
-import TimberGrid, { TNode } from '../../utils/grid';
+import TimberGrid from '../../utils/grid';
 import Timber from '../../utils/trie';
+import { TGrid, GridProps } from '../../utils/types';
 import { capitalizeFirstLetter, randomWords } from '../../utils/utils';
 
 // css
 import './Grid.css';
 
-type GridProps = {
-  size: number;
-};
-
 function Grid({ size: GRID_SIZE }: GridProps): JSX.Element {
-  const [grid, setGrid] = useState<TNode[][]>([]);
+  const [grid, setGrid] = useState<TGrid>([]);
   const [wordFound, setWordFound] = useState<string>('');
   const [letters, setLetters] = useState<string[]>([]);
-  const [trie, setTrie] = useState<Timber>(new Timber());
-  const [points, setPoints] = useState<number>(0);
+  const [trie] = useState<Timber>(new Timber());
+  const [score, setScore] = useState<number>(0);
 
   const toggleCell = (e: MouseEvent, y: number, x: number) => {
     const newGrid = activateCell(grid, [y, x]);
@@ -29,14 +26,14 @@ function Grid({ size: GRID_SIZE }: GridProps): JSX.Element {
 
     const word = letters.join('');
     const found = trie.search(capitalizeFirstLetter(word));
-    const { grid: newGrid, wordOrder } = clearGrid(grid);
+    const { grid: newGrid, points } = clearGrid(grid);
 
     if (!found) {
       setWordFound('not found');
-      setPoints((p) => p - wordOrder);
+      setScore((p) => p - points);
     } else {
       setWordFound(found);
-      setPoints((p) => p + wordOrder);
+      setScore((p) => p + points);
     }
 
     setLetters([]);
@@ -72,7 +69,7 @@ function Grid({ size: GRID_SIZE }: GridProps): JSX.Element {
       </div>
       <button type="submit">Submit</button>
       {wordFound && <div className="word-found">{wordFound}</div>}
-      <div className="points">{points}</div>
+      <div className="points">{score}</div>
     </form>
   );
 }

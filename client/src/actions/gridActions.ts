@@ -1,13 +1,14 @@
 import { astar } from '../utils/astar';
-import { TNode } from '../utils/grid';
+import { TGrid, TNode, TNodePosition } from '../utils/types';
 import { arrayWithFixedLength } from '../utils/utils';
 
-const currentCells: Array<[number, number]> = arrayWithFixedLength(2);
-const visitedCells: Array<[number, number]> = [];
+const currentCells: Array<TNodePosition> = arrayWithFixedLength(2);
+let visitedCells: Array<TNodePosition> = [];
 let path: Array<TNode | undefined>;
 let wordOrder: number = 0;
+let resetsCounter: number = 0;
 
-export const activateCell = (grid: TNode[][], position: [number, number]) => {
+export const activateCell = (grid: TGrid, position: TNodePosition) => {
   const [y, x] = position;
   const cell = grid[y][x];
   if (!cell.active) {
@@ -16,7 +17,9 @@ export const activateCell = (grid: TNode[][], position: [number, number]) => {
     visitedCells.push([y, x]);
 
     if (currentCells.length === 2) {
-      path = astar(grid, currentCells[0], currentCells[1]);
+      const [startNode, endNode] = currentCells;
+
+      path = astar(grid, startNode, endNode);
       for (let i = 0; i < path.length; i++) {
         const [y, x] = path[i]!.position;
         const _cell = grid[y][x];
@@ -31,44 +34,63 @@ export const activateCell = (grid: TNode[][], position: [number, number]) => {
     if (!Array.isArray(path) || path.length > 0) {
       cell.active = true;
       cell.visited = true;
-      wordOrder++;
-      cell.letter += ` ${wordOrder}`;
+      cell.letter += ` ${++wordOrder}`;
     }
   } else {
+    if (resetsCounter > 0) return grid;
     // Remove the active state and the path that led to the cell
     cell.active = false;
     cell.visited = false;
 
-    wordOrder--;
     currentCells[1] = currentCells[0];
-    for (let i = 0; i < path.length; i++) {
-      const [y, x] = path[i]!.position;
-      const _cell = grid[y][x];
-      _cell.visited = false;
-      _cell.belongsToPath = false;
-      _cell.active = false;
-      _cell.letter = _cell.letter.replace(/\s\d+$/, '');
+
+    // If the "not chosen" cell is the first
+    if (!Array.isArray(path)) {
+      clearCell(cell, false, cell.letter.replace(/\s\d+$/, ''));
     }
+
+    if (Array.isArray(path) && path.length > 0) {
+      for (let i = 0; i < path.length; i++) {
+        const [y, x] = path[i]!.position;
+        const _cell = grid[y][x];
+        clearCell(_cell, false, _cell.letter.replace(/\s\d+$/, ''));
+
+        // Do not remove the "not chosen path" cells on submit
+        visitedCells = visitedCells.filter(([y, x]) => y !== _cell.position[0] || x !== _cell.position[1]);
+      }
+    }
+    resetsCounter++;
+    wordOrder--;
   }
 
   return grid;
 };
 
-export const clearGrid = (grid: TNode[][]) => {
+export const clearGrid = (grid: TNode[][]): { grid: TGrid; points: number } => {
   const points = wordOrder;
-  wordOrder = 0;
 
   for (let i = 0; i < visitedCells.length; i++) {
     const [y, x] = visitedCells[i];
     const cell = grid[y][x];
-    cell.visited = true;
-    cell.belongsToPath = false;
-    cell.active = false;
-    cell.letter = '';
+    clearCell(cell);
   }
+
+  // Resets arrays and counters
   currentCells.length = 0;
+  visitedCells.length = 0;
+
+  resetsCounter = 0;
+  wordOrder = 0;
   return {
     grid: grid,
-    wordOrder: points,
+    points: points,
   };
+};
+
+const clearCell = (cell: TNode, visited: boolean = true, letter?: string) => {
+  cell.belongsToPath = false;
+  cell.active = false;
+  cell.visited = visited;
+  cell.letter = letter ? letter : '';
+  return;
 };

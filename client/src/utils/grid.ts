@@ -1,23 +1,9 @@
+import { TGrid } from './types';
 import { alphabet } from './utils';
-
-export type TNode = {
-  letter: string;
-  distance?: number;
-  active: boolean;
-  visited: boolean;
-  parent: null | TNode;
-  belongsToPath: boolean;
-  astar: {
-    g: number;
-    h: number;
-    f: number;
-  };
-  position: [number, number];
-};
 
 export default class TimberGrid {
   private GRID_SIZE: number;
-  private grid: TNode[][];
+  private grid: TGrid;
 
   constructor(public size: number) {
     this.GRID_SIZE = size;

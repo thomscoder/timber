@@ -1,6 +1,6 @@
 import { TNode } from './grid';
 
-const getNeighbors = (grid: TNode[][], position: [number, number]) => {
+const getNeighbors = (grid: TNode[][], position: TNodePosition) => {
   const [y, x] = position;
   const neighbors = new Map();
 
@@ -50,7 +50,7 @@ const getNeighbors = (grid: TNode[][], position: [number, number]) => {
   return neighbors;
 };
 
-export const astar = (grid: TNode[][], start: [number, number], end: [number, number]) => {
+export const astar = (grid: TNode[][], start: TNodePosition, end: TNodePosition) => {
   const openSet = new Set();
   const closedSet = new Set();
   const [sy, sx] = start;
@@ -99,7 +99,7 @@ export const astar = (grid: TNode[][], start: [number, number], end: [number, nu
   return [];
 };
 
-const heuristic = (start: [number, number], end: [number, number]) => {
+const heuristic = (start: TNodePosition, end: TNodePosition) => {
   // Euclidean distance
   const [y1, x1] = start;
   const [y2, x2] = end;
