@@ -63,3 +63,8 @@
 .cell.belongsToPath {
   background-color: rgb(255, 204, 0);
 }
+
+.cell.oneCellIsland {
+  background-color: rgb(255, 251, 180);
+  opacity: 0.5;
+}

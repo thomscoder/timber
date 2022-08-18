@@ -58,8 +58,9 @@ function Grid({ size: GRID_SIZE }: GridProps): JSX.Element {
               const letter = cell.letter;
               const active = cell.active ? 'active' : '';
               const belongsToPath = cell.belongsToPath ? 'belongsToPath' : '';
+              const oneCellIsland = cell.island.visited && cell.island.oneCellIsland ? 'oneCellIsland' : '';
               return (
-                <div key={cellIndex} className={`${active} ${belongsToPath} cell`} onClick={(e) => toggleCell(e, rowIndex, cellIndex)}>
+                <div key={cellIndex} className={`${active} ${belongsToPath} ${oneCellIsland} cell`} onClick={(e) => toggleCell(e, rowIndex, cellIndex)}>
                   {letter}
                 </div>
               );

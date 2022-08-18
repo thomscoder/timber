@@ -1,6 +1,6 @@
-import { TNode } from './grid';
+import { TGrid, TNode, TNodePosition } from './types';
 
-const getNeighbors = (grid: TNode[][], position: TNodePosition) => {
+const getNeighbors = (grid: TGrid, position: TNodePosition) => {
   const [y, x] = position;
   const neighbors = new Map();
 

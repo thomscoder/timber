@@ -15,6 +15,10 @@ export type TNode = {
     f: number;
   };
   position: TNodePosition;
+  island: {
+    visited: boolean;
+    oneCellIsland: boolean;
+  };
 };
 
 export type TGrid = TNode[][];

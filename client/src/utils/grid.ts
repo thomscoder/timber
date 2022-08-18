@@ -20,6 +20,10 @@ export default class TimberGrid {
           f: 0,
         },
         position: [y, x],
+        island: {
+          visited: false,
+          oneCellIsland: false,
+        },
       })),
     );
   }
