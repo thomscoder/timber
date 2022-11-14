@@ -40,6 +40,7 @@ const styles: React.CSSProperties = {
   position: 'absolute',
   top: '0',
   left: '0',
+  height: '65px',
   boxShadow: '0px 0px 10px rgba(3, 3, 3, 0.5)',
   width: '100%',
 };

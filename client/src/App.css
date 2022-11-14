@@ -4,10 +4,16 @@
 }
 
 .App {
+  position: relative;
+  margin-top: 65px;
+  height: calc(100% - 65px);
+}
+
+.wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -53%);
+  transform: translate(-50%, -50%);
 }
 
 .loading-wrapper {
@@ -53,9 +59,6 @@
 }
 
 @media screen and (max-height: 549px) {
-  .App {
-    transform: translate(-50%, -43%);
-  }
   .cell {
     font-size: 0.8em;
   }

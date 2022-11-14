@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useRecoilValue } from 'recoil';
 import { gameDifficultyState, scoreToWinState } from '../../atoms/atoms';
 import LinkedinLogo from '../../assets/linkedin.png';
+import GithubLogo from '../../assets/github.png';
 
 import './Tutorial.css';
 // @ts-ignore
@@ -177,6 +178,9 @@ function Tutorial(props) {
             Contacts:{' '}
             <a href="https://linkedin.com/in/thomas-albertini" target="_blank">
               <img src={LinkedinLogo} alt="link to linkedin profile" width={40} />
+            </a>
+            <a href="https://github.com/thomscoder/timber" target="_blank">
+              <img src={GithubLogo} alt="link to linkedin profile" width={20} />
             </a>
           </small>
         </p>
