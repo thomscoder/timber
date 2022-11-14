@@ -1,7 +1,15 @@
 import { faker } from '@faker-js/faker';
 
-export const alphabet = Array.from({ length: 26 }, (v, k) => String.fromCharCode(k + 65));
+const mediaQueryReallySmallMobile = window.matchMedia('(max-width: 320px)').matches;
+const mediaQuerySmallMobile = window.matchMedia('(max-width: 480px)').matches;
+const mediaQueryMobile = window.matchMedia('(max-width: 768px)').matches;
+const mediaQueryTablet = window.matchMedia('(max-width: 1024px)').matches;
+const mediaQueryDesktop = window.matchMedia('(min-width: 1024px)').matches;
+const cellSize = (mediaQueryReallySmallMobile && 30) || (mediaQueryMobile && 40) || (mediaQueryTablet && 50) || (mediaQueryDesktop && 50);
 
+export const GRID_WIDTH = 6;
+export const GRID_HEIGHT = 8;
+export const CELL_SIZE = cellSize;
 export const arrayWithFixedLength = (length: number) => {
   let array = new Array();
   array.push = function () {
@@ -18,9 +26,9 @@ export const capitalizeFirstLetter = (str: string): string => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-export const randomWords = [
-  ...Array.from({ length: 1000000 }, (v, k) => faker.name.firstName()),
-  ...Array.from({ length: 1000000 }, (v, k) => capitalizeFirstLetter(faker.word.noun())),
-  ...Array.from({ length: 1000000 }, (v, k) => capitalizeFirstLetter(faker.word.adjective())),
-  ...Array.from({ length: 1000000 }, (v, k) => capitalizeFirstLetter(faker.address.country())),
-];
+export const numberFormatter = (num: number) => {
+  // @ts-ignore
+  return Math.abs(num) > 999 ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'k' : Math.sign(num) * Math.abs(num);
+};
+
+export const HOW_MANY = 1000000;

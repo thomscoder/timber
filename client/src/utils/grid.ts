@@ -1,19 +1,21 @@
 import { TGrid } from './types';
-import { alphabet } from './utils';
+import { GRID_HEIGHT, GRID_WIDTH } from './utils';
 
 export default class TimberGrid {
-  private GRID_SIZE: number;
-  private grid: TGrid;
+  private grid: TGrid | undefined;
 
-  constructor(public size: number) {
-    this.GRID_SIZE = size;
-    this.grid = [...Array(this.GRID_SIZE)].map((v, y) =>
-      [...Array(this.GRID_SIZE)].map((v, x) => ({
+  constructor() {
+    this.grid = undefined;
+  }
+
+  public async generate(alphabet: string[]) {
+    this.grid = [...Array(GRID_HEIGHT)].map((v, y) =>
+      [...Array(GRID_WIDTH)].map((v, x) => ({
         letter: alphabet[Math.floor(Math.random() * alphabet.length)],
-        active: false,
-        visited: false,
-        parent: null,
-        belongsToPath: false,
+        active: false, // Active is when the cell is clicked
+        visited: false, // Visited is when the cell is visited by the path
+        parent: null, // See A* algorithm
+        belongsToPath: false, // Belongs to the path - UI (colors yellow each cell of the path)
         astar: {
           g: 0,
           h: 0,
@@ -21,19 +23,17 @@ export default class TimberGrid {
         },
         position: [y, x],
         island: {
+          // To auto detect one cell islands
           visited: false,
           oneCellIsland: false,
         },
       })),
     );
-  }
-
-  public generate() {
     return this.grid;
   }
 
   public toggleCell(y: number, x: number) {
-    this.grid[y][x].active = true;
+    this.grid![y][x].active = true;
     return this.grid;
   }
 }

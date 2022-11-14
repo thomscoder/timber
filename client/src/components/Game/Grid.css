@@ -1,54 +1,85 @@
-.grid.shake {
-  /* Start the shake animation and make the animation last for 0.5 seconds */
-  animation: shake 0.5s;
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
-@keyframes shake {
+form .form-utils {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1em;
+}
+
+#submit {
+  border-color: #fda2d5;
+  transition: all 0.25s;
+}
+
+form button#shuffle,
+#win button,
+#loss button {
+  border-color: #ffac4b;
+}
+
+form button#finish {
+  border-color: #ffac4b;
+}
+
+button.finish {
+  background-color: #ffac4b;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
   0% {
-    transform: translate(1px, 1px) rotate(0deg);
-  }
-  10% {
-    transform: translate(-1px, -2px) rotate(-1deg);
-  }
-  20% {
-    transform: translate(-3px, 0px) rotate(1deg);
-  }
-  30% {
-    transform: translate(3px, 2px) rotate(0deg);
-  }
-  40% {
-    transform: translate(1px, -1px) rotate(1deg);
+    transform: scale(1);
   }
   50% {
-    transform: translate(-1px, 2px) rotate(-1deg);
-  }
-  60% {
-    transform: translate(-3px, 1px) rotate(0deg);
-  }
-  70% {
-    transform: translate(3px, 1px) rotate(-1deg);
-  }
-  80% {
-    transform: translate(-1px, -1px) rotate(1deg);
-  }
-  90% {
-    transform: translate(1px, 2px) rotate(0deg);
+    transform: scale(1.1);
   }
   100% {
-    transform: translate(1px, -2px) rotate(-1deg);
+    transform: scale(1);
   }
 }
 
-.row {
+form button:hover {
+  border-color: #fda2d5;
+}
+
+.words-wrapper {
+  width: 290px;
+  overflow: auto;
+}
+
+.wrapper .word-found,
+.wrapper .word-not-found {
+  font-size: 1rem;
+  text-align: center;
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.wrapper .word-found {
+  background-color: rgb(0, 255, 81, 0.7);
+}
+
+.wrapper .word-not-found {
+  background-color: rgb(255, 0, 0, 0.7);
+}
+
+.timber-row {
   display: flex;
 }
 
 .cell {
   box-sizing: border-box;
-  border: solid #a00;
+  border: solid #12fcd4;
+  box-shadow: 5px 5px 0px -3px rgb(122, 87, 0);
+  color: #fff;
   margin: 4px;
-  height: 50px;
-  width: 50px;
   transition: all 0.2s ease-in-out;
   display: flex;
   justify-content: center;
@@ -58,6 +89,8 @@
 
 .cell.active {
   background-color: rgb(0, 255, 81);
+  color: #000;
+  box-shadow: none;
 }
 
 .cell.belongsToPath {
@@ -65,6 +98,7 @@
 }
 
 .cell.oneCellIsland {
-  background-color: rgb(255, 251, 180);
+  background-color: #fda2d5;
   opacity: 0.5;
+  color: #0005;
 }

@@ -1,0 +1,49 @@
+.modal-dialog .modal-content {
+  background-color: #1e1e1e;
+}
+
+.modal-content button#close {
+  background-color: #ffac4b;
+}
+
+.modal-content button[aria-label='Close'] {
+  color: #fff;
+}
+
+.modal-content #easy {
+  color: #fff;
+  background-color: rgb(0, 255, 81, 0.7);
+}
+
+.modal-content #medium {
+  color: #fff;
+  background-color: #ffac4b;
+}
+
+.modal-content #hard {
+  color: #fff;
+  background-color: #ff4d4d;
+}
+
+.modal-content h5 {
+  font-weight: bolder;
+}
+
+.letter-tutorial {
+  height: 30px;
+  width: 30px;
+  border: solid #fff;
+  text-align: center;
+  display: inline-block;
+}
+
+.letter-tutorial:nth-of-type(1) {
+  display: block;
+}
+
+.selected-letter {
+  background-color: rgb(0, 255, 81, 0.7);
+}
+.path-letter {
+  background-color: #ffac4b;
+}

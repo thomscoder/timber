@@ -1,14 +1,15 @@
 import { TGrid, TNodePosition } from './types';
+import { GRID_HEIGHT, GRID_WIDTH } from './utils';
 
-export const exploreIslands = (grid: TGrid): void => {
+export const exploreIslands = (grid: TGrid): boolean => {
   const visited = new Set<string>();
   const sizes: number[] = [];
-  let count = 0;
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid.length; j++) {
+  // let count = 0;
+  for (let i = 0; i < GRID_HEIGHT; i++) {
+    for (let j = 0; j < GRID_WIDTH; j++) {
       const size = explore(grid, [i, j], visited);
       if (size) {
-        count++;
+        // count++;
         sizes.push(size);
         // if there's an island of one cell discard it
         if (size === 1) {
@@ -18,13 +19,14 @@ export const exploreIslands = (grid: TGrid): void => {
       }
     }
   }
-  return;
+  const allBadIslands = sizes.every((size) => size <= 2);
+  return allBadIslands;
 };
 
 const explore = (grid: TGrid, position: TNodePosition, visited: Set<string>) => {
   const [y, x] = position;
-  const checkBoundsColumn = 0 <= y && y < grid.length;
-  const checkBoundsRow = 0 <= x && x < grid.length;
+  const checkBoundsColumn = 0 <= y && y < GRID_HEIGHT;
+  const checkBoundsRow = 0 <= x && x < GRID_WIDTH;
 
   if (!checkBoundsRow || !checkBoundsColumn) return 0;
 

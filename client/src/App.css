@@ -1,8 +1,28 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  position: relative;
+  width: 100%;
+}
+
+.App {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -53%);
+}
+
+.loading-wrapper {
   text-align: center;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading span {
+  padding: 2rem 0;
 }
 
 .logo {
@@ -29,6 +49,15 @@
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
+  }
+}
+
+@media screen and (max-height: 549px) {
+  .App {
+    transform: translate(-50%, -43%);
+  }
+  .cell {
+    font-size: 0.8em;
   }
 }
 

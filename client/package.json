@@ -10,9 +10,14 @@
   },
   "dependencies": {
     "@faker-js/faker": "^7.4.0",
+    "@popperjs/core": "^2.11.5",
+    "bootstrap": "^5.2.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
-    "reactjs-popup": "^2.0.5"
+    "react-spinners-kit": "^1.9.1",
+    "reactjs-popup": "^2.0.5",
+    "recoil": "^0.7.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

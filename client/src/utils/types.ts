@@ -1,5 +1,13 @@
+import Timber from './trie';
+
 export type GridProps = {
-  size: number;
+  database: Timber;
+  alphabet: string[];
+};
+
+export type ResultProps = {
+  score: number;
+  playAgain: () => void;
 };
 
 export type TNode = {
